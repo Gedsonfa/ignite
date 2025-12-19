@@ -13,6 +13,7 @@ declare module 'styled-components' {
     shape: string,
     title: string,
     text: string,
+    text_dark: string,
     background: string
     };
 
