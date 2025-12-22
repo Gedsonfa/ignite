@@ -3,6 +3,7 @@ import { Feather } from '@expo/vector-icons';
 import { RFPercentage,
     RFValue
 } from 'react-native-responsive-fontsize';
+import { getStatusBarHeight } from 'react-native-iphone-x-helper'
 
 export const Container = styled.View`
     flex: 1;
@@ -11,7 +12,7 @@ export const Container = styled.View`
 
 export const Header = styled.View`
     width: 100%;
-    height: ${RFValue(42)}px;
+    height: ${RFPercentage(42)}px;
 
     background-color: ${({theme})=>theme.colors.primary};
 
@@ -24,6 +25,8 @@ export const UserWrapper = styled.View`
     width: 100%;
 
     padding: 0 24px;
+    /*originalmente tem esse trecho
+    margin-top: ${getStatusBarHeight() + RFValue(28)}px;*/
 
     flex-direction: row;
     justify-content: space-between;
@@ -65,4 +68,9 @@ export const HighlightCards = styled.ScrollView.attrs({
     horizontal: true,
     showsHorizontalScrollIndicator: false,
     contentContainerStyle: {paddingHorizontal:24}
-})``;
+})`
+    width: 100%;
+
+    position: absolute;
+    margin-top: ${RFPercentage(30)}px;
+`;
