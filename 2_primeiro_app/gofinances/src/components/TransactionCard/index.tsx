@@ -10,20 +10,35 @@ import { Container,
     Date
  } from './styles';
 
+interface Category {
+    name: string;
+    icon: string;
+}
 
-export function TransactionCard(){
+interface Data {
+    title: string;
+    amount: string;
+    category: Category;
+    date: string;
+}
+
+interface Props {
+    data: Data;
+}
+
+export function TransactionCard({data} : Props){
     return(
         <Container>
-             <Title>Title</Title>
+             <Title>{data.title}</Title>
 
-             <Amount>R$ xx,xx</Amount>
+             <Amount>{data.amount}</Amount>
 
              <Footer>
                 <Category>
                     <Icon name="dollar-sign"/>
-                    <CategoryName>Vendas</CategoryName>
+                    <CategoryName>{data.category.name}</CategoryName>
                 </Category>
-                <Date>dd/mm/yyyy</Date>
+                <Date>{data.date}</Date>
              </Footer>
         </Container>
     )
