@@ -22,6 +22,7 @@ import { getBottomSpace } from "react-native-iphone-x-helper";
 export function Dashboard(){
     const data =[
         {
+            type: 'positive',
             title: "Title",
             amount: "R$ XX,XX",
             category: {
@@ -31,6 +32,7 @@ export function Dashboard(){
             date: "dd/mm/yyyy"
         },
         {
+            type: 'negative',
             title: "Title1",
             amount: "R$ XX,XX",
             category: {
@@ -40,6 +42,7 @@ export function Dashboard(){
             date: "dd/mm/yyyy"
         },
         {
+            type: 'negative',
             title: "Title2",
             amount: "R$ XX,XX",
             category: {
