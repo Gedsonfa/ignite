@@ -1,9 +1,12 @@
 import React, { useState } from "react";
+import { Modal } from 'react-native';
 
 import { Input } from "../../components/Form/Input";
 import { Button } from "../../components/Form/Button";
 import { TransactionTypeButton } from "../../components/Form/TransactionTypeButton";
-import { CategorySelect } from "../../components/Form/CategorySelect";
+import { CategorySelectButton } from "../../components/Form/CategorySelectButton";
+
+import { CategorySelect } from "../CategorySelect";
 
 import { Container,
     Header,
@@ -12,10 +15,11 @@ import { Container,
     Fields,
     TransactionTypes
  } from './styles';
-import theme from "../../global/@types/theme";
+import theme from "../../global/styles/theme";
 
 export function Register(){
     const [transactionType, setTransactionType] = useState('');
+    const [categoryModalOpen, setCategoryModalOpen] = useState(false);
 
     function handleTransactionsTypeSelect(type: 'up' | 'down') {
         setTransactionType(type);
@@ -51,10 +55,14 @@ export function Register(){
 
                     />
                 </TransactionTypes>
-                <CategorySelect title="Categoria"/>
+                <CategorySelectButton title="Categoria"/>
                 </Fields>
                 <Button title="Enviar"/>
             </Form>
+
+            <Modal visible={categoryModalOpen}>
+                <CategorySelect/>
+            </Modal>
         </Container>
     );
 }
