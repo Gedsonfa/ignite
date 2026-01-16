@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Modal } from 'react-native';
-
-import { Input } from "../../components/Form/Input";
+import { useForm } from 'react-hook-form';
+import { InputForm } from "../../components/Form/InputForm";
 import { Button } from "../../components/Form/Button";
 import { TransactionTypeButton } from "../../components/Form/TransactionTypeButton";
 import { CategorySelectButton } from "../../components/Form/CategorySelectButton";
@@ -17,6 +17,11 @@ import { Container,
  } from './styles';
 import theme from "../../global/styles/theme";
 
+interface FormData {
+    name: string;
+    amount: string;
+}
+
 export function Register(){
     const [transactionType, setTransactionType] = useState('');
     const [categoryModalOpen, setCategoryModalOpen] = useState(false);
@@ -26,6 +31,11 @@ export function Register(){
         name: 'Categoria',
         icon: 'any'
     });
+
+    const {
+        control,
+        handleSubmit
+    } = useForm();
 
     function handleTransactionsTypeSelect(type: 'up' | 'down') {
         setTransactionType(type);
@@ -40,6 +50,16 @@ export function Register(){
         setCategoryModalOpen(false);
     }
 
+    function handleRegister(form: FormData){
+        const data = {
+            name: form.name,
+            amount: form.amount,
+            transactionType,
+            category: category.key
+        }
+        console.log(data);
+    }
+
     return(
         <Container>
             <Header>
@@ -48,12 +68,16 @@ export function Register(){
 
             <Form>
                 <Fields>
-                    <Input 
+                    <InputForm 
+                        name="name"
                         placeholder="Nome"
+                        control={control}
                         placeholderTextColor={theme.colors.text}
                     />
-                    <Input 
+                    <InputForm
+                        name="amount"
                         placeholder="Preço"
+                        control={control}
                         placeholderTextColor={theme.colors.text}
                     />
                 <TransactionTypes>
@@ -74,7 +98,8 @@ export function Register(){
                 <CategorySelectButton title={category.name}
                 onPress={handleOpenSelectCategoryModal}/>
                 </Fields>
-                <Button title="Enviar"/>
+                <Button title="Enviar"
+                onPress={handleSubmit(handleRegister)}/>
             </Form>
 
             <Modal visible={categoryModalOpen}>
