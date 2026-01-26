@@ -1,21 +1,23 @@
 import React from "react";
 import { TextInputProps } from "react-native";
-import { Control, Controller } from 'react-hook-form';
+import { Control, Controller, FieldValues, Path } from 'react-hook-form';
 
 import { Input } from "../Input";
 
-import { Container } from "./styles";
+import { Container, Error } from "./styles";
 
-interface Props extends TextInputProps {
-    control: Control;
-    name: string;
+interface Props<T extends FieldValues> extends TextInputProps{
+    control: Control<T>;
+    name: Path<T>;
+    error: Path<T>;
 }
 
-export function InputForm({
+export function InputForm<T extends FieldValues>({
     control,
     name,
+    error,
     ...rest
-}: Props){
+}: Props<T>){
     return(
         <Container>
             <Controller
@@ -29,6 +31,7 @@ export function InputForm({
                 )}
                 name={name}
             />
+            {error && <Error>{ error }</Error>}
         </Container>
     );
 }
